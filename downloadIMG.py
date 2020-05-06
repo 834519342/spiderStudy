@@ -14,7 +14,7 @@ class download_img(object):
         self.start_page = self.imgServer + '/4kmeinv'  # 开始页面
         self.imgUrls = []
         self.pageUrls = []
-        self.log = logManager('壁纸')
+        self.log = logManager.log_init('bz')
 
     '''
     获取所有页面地址
@@ -27,7 +27,7 @@ class download_img(object):
         while 1:
             # 保存页面地址
             print('爬取的页面:', next_url, threading.currentThread())
-            self.log.info('爬取的页面:', next_url, threading.currentThread())
+            self.log.info('爬取的页面:' + next_url)
             self.pageUrls.append(next_url)
             # 爬取下页地址
             req = requests.get(next_url)
@@ -66,7 +66,7 @@ class download_img(object):
             for img_url in img_urls:
                 img_info = {'url': self.imgServer+img_url.get('src'), 'name': img_url.get('alt')}
                 print('爬取的图片:', img_info, threading.currentThread())
-                self.log.info('爬取的图片:', img_info, threading.currentThread())
+                self.log.info('爬取的图片:' + img_info['name'] + img_info['url'])
                 threadLock.acquire()
                 self.imgUrls.append(img_info)
                 threadLock.release()
@@ -79,7 +79,7 @@ class download_img(object):
     '''
     def download(self, img_info):
         print('下载图片:', img_info, threading.currentThread())
-        self.log.info('下载图片:', img_info, threading.currentThread())
+        self.log.info('下载图片:' + img_info['name'] + img_info['url'])
         # 日志存放路径
         img_dir = './imgs'
         if not os.path.exists(img_dir):

@@ -23,7 +23,7 @@ def log_init(log_name='test', level="INFO"):
     # log_instance = logging.getLogger(log_name)
 
     # 使用回滚模块RotatingFileHandler输出到文件
-    log_file_handler = RotatingFileHandler(filename=log_name, maxBytes=1024, backupCount=5, encoding='utf-8')
+    log_file_handler = RotatingFileHandler(filename=log_name, maxBytes=102400, backupCount=5, encoding='utf-8')
     log_file_handler.setFormatter(logging.Formatter(log_fmt))  # 记录格式
     log_file_handler.setLevel(level)  # 记录等级
     log_instance = logging.getLogger(log_name)  # 创建日志对象
@@ -34,7 +34,7 @@ def log_init(log_name='test', level="INFO"):
     print_consolse = logging.StreamHandler()  # sys.stdout or sys.stderr may be used.
     print_consolse.setFormatter(logging.Formatter(log_fmt))  # 记录格式
     print_consolse.setLevel(level)  # 记录等级
-    log_instance.addHandler(print_consolse)
+    # log_instance.addHandler(print_consolse)
 
     return log_instance
 
