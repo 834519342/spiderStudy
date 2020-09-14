@@ -1,8 +1,10 @@
 
+import requests
+import sys
+import time
 from bs4 import BeautifulSoup
-import requests, sys, time
 
-'''
+"""
 类说明：下载《笔趣看》网小说《一念永恒》
 Parametes:
     无
@@ -10,10 +12,10 @@ Returns:
     无
 Modify:
     2020-04-24
-'''
+"""
+
 
 class downloaderTXT(object):
-
     def __init__(self):
         self.__server = 'http://www.biqukan.com'
         self.__target = 'http://www.biqukan.com/1_1094/'
@@ -52,7 +54,8 @@ class downloaderTXT(object):
     Modify:
         2020-04-24
     '''
-    def get_contents(self, target):
+    @staticmethod
+    def get_contents(target):
         req = requests.get(target)
         req.encoding = 'gbk'
         html = req.text
@@ -72,7 +75,8 @@ class downloaderTXT(object):
     Modify:
         2020-04-24
     '''
-    def writer(self, name, path, text):
+    @staticmethod
+    def writer(name, path, text):
         write_flag = True
         with open(path, 'a', encoding='utf-8') as f:
             f.write(name + '\n')
@@ -89,5 +93,3 @@ if __name__ == '__main__':
         sys.stdout.write(" 进度：%.2f%%" % (float(i/dl.nums)*100) + '\r')
         time.sleep(0.01)
     print('进度：100.00%')
-
-

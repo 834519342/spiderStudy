@@ -1,11 +1,12 @@
 
 import requests
-from bs4 import BeautifulSoup
+import re
+import os
 import time
-from contextlib import closing
-import re, os
 import threading
-import log_manager
+from bs4 import BeautifulSoup
+from contextlib import closing
+import logging_manager
 
 
 class download_img(object):
@@ -14,7 +15,7 @@ class download_img(object):
         self.start_page = self.imgServer + '/4kmeinv'  # 开始页面
         self.imgUrls = []
         self.pageUrls = []
-        self.log = log_manager.log_init('bz')
+        self.log = logging_manager.log_init('bz')
 
     '''
     获取所有页面地址
